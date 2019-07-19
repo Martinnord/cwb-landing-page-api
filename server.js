@@ -8,8 +8,8 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const corsOptions = {
-  origin: "https://www.coworkingbuddies.com",
-  allowedHeaders: ["Content-Type", "Authorization"]
+  origin: "*"
+  // allowedHeaders: ["Content-Type", "Authorization"]
 };
 
 const validEmail = yup
@@ -54,10 +54,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // });
 
 app.post("/email_received", cors(corsOptions), async (req, res) => {
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "https://www.coworkingbuddies.com"
-  );
+  // res.setHeader(
+  //   "Access-Control-Allow-Origin",
+  //   "https://www.coworkingbuddies.com"
+  // );
   if (req.body.email === "") return res.send("Please provide an email");
 
   try {

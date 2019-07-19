@@ -56,16 +56,18 @@ app.use(cors());
 // });
 
 app.post("/email_received", async (req, res) => {
-  // res.setHeader(
-  //   "Access-Control-Allow-Origin",
-  //   "https://www.coworkingbuddies.com"
-  // );
   if (req.body.email === "") return res.send("Please provide an email");
 
   try {
     await validEmail.validate(req.body.email, { abortEarly: false });
   } catch (error) {
     return res.send(error.message);
+  }
+
+  const emailAlreadyExists = await Email.findOne({ email: req.body.email });
+
+  if (emailAlreadyExists) {
+    return res.send("Already signed up");
   }
 
   await Email.create({ email: req.body.email });

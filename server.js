@@ -3,6 +3,9 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const yup = require("yup");
+const dotenv = require("dotenv");
+
+dotenv.config();
 
 const validEmail = yup
   .string()
@@ -11,7 +14,7 @@ const validEmail = yup
   .email("Please provide a valid email");
 
 mongoose.connect(
-  "mongodb://localhost/cwb_email_list",
+  process.env.MONGODB_URI,
   {
     useNewUrlParser: true
   },
@@ -65,6 +68,6 @@ app.post("/email_received", async (req, res) => {
   return res.send("You will be notified!");
 });
 
-app.listen(6969, () => {
+app.listen(process.env.PORT, () => {
   console.log("ITS ONLINE");
 });

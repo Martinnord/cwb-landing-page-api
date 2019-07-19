@@ -68,6 +68,8 @@ app.post("/email_received", async (req, res) => {
   return res.send("You will be notified!");
 });
 
-app.listen(process.env.PORT, () => {
+const PORT = process.env.PORT || 6969;
+
+app.listen(PORT, () => {
   console.log("ITS ONLINE");
 });

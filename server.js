@@ -32,7 +32,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "https://www.coworkingbuddies.com/"
+    origin: "https://www.coworkingbuddies.com"
   })
 );
 

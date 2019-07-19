@@ -38,12 +38,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(
-  cors({
-    origin: "https://www.coworkingbuddies.com/",
-    credentials: true
-  })
-);
+app.use(cors());
 
 // app.get("/email_list", async (req, res) => {
 //   try {

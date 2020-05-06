@@ -56,7 +56,7 @@ app.use(cors());
 // });
 
 app.post("/email_received", async (req, res) => {
-  if (req.body.email === "") return res.send("Please type something");
+  if (req.body.email === "") return res.send("Please write something");
 
   // try {
   //   await validEmail.validate(req.body.email, { abortEarly: false });
@@ -64,7 +64,7 @@ app.post("/email_received", async (req, res) => {
   //   return res.send(error.message);
   // }
 
-  // const emailAlreadyExists = await Email.findOne({ email: req.body.email });
+  const emailAlreadyExists = await Email.findOne({ email: req.body.email });
 
   if (emailAlreadyExists) {
     return res.send("Already suggested");

@@ -8,7 +8,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const corsOptions = {
-  origin: "*"
+  origin: "*",
   // allowedHeaders: ["Content-Type", "Authorization"]
 };
 
@@ -21,9 +21,9 @@ const validEmail = yup
 mongoose.connect(
   process.env.MONGODB_URI,
   {
-    useNewUrlParser: true
+    useNewUrlParser: true,
   },
-  err => {
+  (err) => {
     if (err) console.log("WE FUCKED UP");
 
     console.log("we are connected");
@@ -56,23 +56,23 @@ app.use(cors());
 // });
 
 app.post("/email_received", async (req, res) => {
-  if (req.body.email === "") return res.send("Please provide an email");
+  if (req.body.email === "") return res.send("Please type something");
 
-  try {
-    await validEmail.validate(req.body.email, { abortEarly: false });
-  } catch (error) {
-    return res.send(error.message);
-  }
+  // try {
+  //   await validEmail.validate(req.body.email, { abortEarly: false });
+  // } catch (error) {
+  //   return res.send(error.message);
+  // }
 
-  const emailAlreadyExists = await Email.findOne({ email: req.body.email });
+  // const emailAlreadyExists = await Email.findOne({ email: req.body.email });
 
   if (emailAlreadyExists) {
-    return res.send("Already signed up");
+    return res.send("Already suggested");
   }
 
   await Email.create({ email: req.body.email });
 
-  return res.send("You will be notified!");
+  return res.send("Thank you!");
 });
 
 const PORT = process.env.PORT || 6969;
